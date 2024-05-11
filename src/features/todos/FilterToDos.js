@@ -1,11 +1,18 @@
-import styles from "./FilterToDos.module.css";
+import styles from "../../styles/FilterToDos.module.css";
+import { useSelector } from "react-redux";
 
 export function FilterToDos() {
+  const categories = useSelector((store) => store.todo.categories);
+
   return (
     <form method="post" className={styles.sortForm}>
       <label>
         <span>Filter</span>
-        <select required></select>
+        <select required>
+          {categories.map((category, index) => (
+            <option key={index}>{category}</option>
+          ))}
+        </select>
       </label>
       <button type="submit">
         <svg

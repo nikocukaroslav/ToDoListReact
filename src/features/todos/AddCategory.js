@@ -1,18 +1,29 @@
-import styles from "./AddCategoty.module.css";
+import styles from "../../styles/AddCategoty.module.css";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addCategory } from "./ToDoSlice";
 
 export function AddCategory() {
   const [active, setActive] = useState(false);
+  const [category, setCategory] = useState("");
+
+  const dispatch = useDispatch();
 
   function HandleActive() {
     setActive((active) => !active);
+  }
+
+  function HandleSubmit(e) {
+    e.preventDefault();
+    dispatch(addCategory(category));
+    setCategory("");
   }
 
   return (
     <>
       {active === false ? (
         <div className={styles.addCategoryButton} onClick={HandleActive}>
-          <span>Add categoty</span>
+          <span>Add category</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="currentColor"
@@ -23,7 +34,7 @@ export function AddCategory() {
           </svg>
         </div>
       ) : (
-        <div className={styles.addCategoryForm}>
+        <form className={styles.addCategoryForm} onSubmit={HandleSubmit}>
           <span className={styles.backButton} onClick={HandleActive}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -39,9 +50,13 @@ export function AddCategory() {
               />
             </svg>
           </span>
-          <input type="text" />
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
           <button>Add</button>
-        </div>
+        </form>
       )}
     </>
   );

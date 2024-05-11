@@ -1,3 +1,14 @@
+ul {
+    max-height: 36rem;
+    overflow: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    list-style: none;
+}
+
+
 li {
     display: flex;
     align-items: center;
@@ -11,7 +22,7 @@ li {
 .trashButton {
     background-color: #333;
     border: 2px solid #333;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: 0.4rem;
@@ -54,8 +65,4 @@ li {
 
 .completed {
     text-decoration: line-through;
-}
-
-.darkgray {
-    color: darkgrey;
 }
