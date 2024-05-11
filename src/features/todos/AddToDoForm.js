@@ -1,5 +1,5 @@
 import styles from "../../styles/AddToDoForm.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToDo } from "./ToDoSlice";
 
@@ -12,42 +12,50 @@ export function AddToDoForm() {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (categories.length > 0) setCategory(categories[0].categoryName);
+  }, [categories]);
+
   function HandleSubmit(e) {
     e.preventDefault();
-    const newToDo = { task, category, date };
-    dispatch(addToDo(newToDo));
-    setTask("");
-    setCategory("");
-    setDate("");
+    if (category) {
+      const newToDo = {
+        id: Date.now(),
+        isPerformed: false,
+        task,
+        category,
+        date,
+      };
+      dispatch(addToDo(newToDo));
+      setTask("");
+      setDate("");
+    }
   }
 
   return (
-    <>
-      <h2>ToDo list</h2>
-      <form className={styles.addToDoForm} onSubmit={HandleSubmit}>
-        <input
-          type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-          required
-        />
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          required
-        >
-          {categories.map((category, index) => (
-            <option key={index}>{category}</option>
-          ))}
-        </select>
-        <input
-          value={date}
-          type="date"
-          className={styles.date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <button>Add</button>
-      </form>
-    </>
+    <form className={styles.addToDoForm} onSubmit={HandleSubmit}>
+      <input
+        type="text"
+        value={task}
+        onChange={(e) => setTask(e.target.value)}
+        required
+      />
+      <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        required
+      >
+        {categories.map((category, index) => (
+          <option key={index}>{category.categoryName}</option>
+        ))}
+      </select>
+      <input
+        value={date}
+        type="date"
+        className={styles.date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <button>Add</button>
+    </form>
   );
 }

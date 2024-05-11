@@ -1,16 +1,24 @@
 import styles from "../../styles/FilterToDos.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { filterToDos } from "./ToDoSlice";
 
 export function FilterToDos() {
   const categories = useSelector((store) => store.todo.categories);
 
+  const dispatch = useDispatch();
+
+  function HandleFilter(e, id) {
+    e.preventDefault();
+    dispatch(filterToDos(id));
+  }
+
   return (
-    <form method="post" className={styles.sortForm}>
+    <form method="post" className={styles.sortForm} onSubmit={HandleFilter}>
       <label>
         <span>Filter</span>
         <select required>
           {categories.map((category, index) => (
-            <option key={index}>{category}</option>
+            <option key={index}>{category.categoryName}</option>
           ))}
         </select>
       </label>

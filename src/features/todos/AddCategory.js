@@ -5,7 +5,7 @@ import { addCategory } from "./ToDoSlice";
 
 export function AddCategory() {
   const [active, setActive] = useState(false);
-  const [category, setCategory] = useState("");
+  const [categoryName, setCategoryName] = useState("");
 
   const dispatch = useDispatch();
 
@@ -15,8 +15,9 @@ export function AddCategory() {
 
   function HandleSubmit(e) {
     e.preventDefault();
-    dispatch(addCategory(category));
-    setCategory("");
+    const newCategory = { id: Date.now(), categoryName };
+    dispatch(addCategory(newCategory));
+    setCategoryName("");
   }
 
   return (
@@ -52,8 +53,8 @@ export function AddCategory() {
           </span>
           <input
             type="text"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            value={categoryName}
+            onChange={(e) => setCategoryName(e.target.value)}
           />
           <button>Add</button>
         </form>
