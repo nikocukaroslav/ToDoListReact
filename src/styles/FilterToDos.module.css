@@ -34,3 +34,7 @@
     justify-content: center;
 }
 
+.buttons {
+    display: flex;
+    gap: 0;
+}

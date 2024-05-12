@@ -107,13 +107,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/features/todos/ToDoList.js</url>
-          <line>16</line>
+          <line>19</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/features/todos/AddToDoForm.js</url>
-          <line>61</line>
-          <properties lambdaOrdinal="-1" />
+          <line>69</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

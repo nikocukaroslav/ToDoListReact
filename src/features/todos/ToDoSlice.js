@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   todos: [],
   categories: [],
+  filteredToDos: [],
 };
 
 const todoSlice = createSlice({
@@ -26,7 +27,12 @@ const todoSlice = createSlice({
       );
     },
     filterToDos(state, action) {
-      state.todos.map((todo) => todo);
+      state.filteredToDos = state.todos.filter(
+        (todo) => todo.categoryId === action.payload,
+      );
+    },
+    removeFilter(state) {
+      state.filteredToDos.length = 0;
     },
   },
 });
@@ -37,6 +43,7 @@ export const {
   deleteToDo,
   togglePerformed,
   filterToDos,
+  removeFilter,
 } = todoSlice.actions;
 
 export default todoSlice.reducer;

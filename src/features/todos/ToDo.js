@@ -52,7 +52,7 @@ export function ToDo({ todo }) {
         </button>
       ) : (
         <div className={styles.todoDescription}>
-          <span>{todo.category}</span>
+          <span>{todo.categoryName}</span>
           <span>{todo.date}</span>
         </div>
       )}

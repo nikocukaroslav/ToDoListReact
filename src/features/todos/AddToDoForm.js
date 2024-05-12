@@ -1,29 +1,32 @@
 import styles from "../../styles/AddToDoForm.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToDo } from "./ToDoSlice";
 
 export function AddToDoForm() {
   const [task, setTask] = useState("");
-  const [category, setCategory] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [categoryName, setCategoryName] = useState("");
   const [date, setDate] = useState("");
 
   const categories = useSelector((store) => store.todo.categories);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (categories.length > 0) setCategory(categories[0].categoryName);
-  }, [categories]);
+  /* useEffect(() => {
+         if (categories.length === 1) setCategoryName(categories[0].categoryName);
+       }, [categories]);*/
 
   function HandleSubmit(e) {
     e.preventDefault();
-    if (category) {
+    if (!categoryName || !task) return;
+    if (categoryName) {
       const newToDo = {
         id: Date.now(),
         isPerformed: false,
         task,
-        category,
+        categoryId,
+        categoryName,
         date,
       };
       dispatch(addToDo(newToDo));
@@ -41,8 +44,14 @@ export function AddToDoForm() {
         required
       />
       <select
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
+        value={categoryName}
+        onChange={(e) => {
+          const selectedCategory = categories.find(
+            (category) => category.categoryName === e.target.value,
+          );
+          setCategoryName(selectedCategory.categoryName);
+          setCategoryId(selectedCategory.id);
+        }}
         required
       >
         {categories.map((category, index) => (
