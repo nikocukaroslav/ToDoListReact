@@ -1,7 +1,7 @@
 import styles from "../../styles/AddCategoty.module.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addCategory } from "./ToDoSlice";
+import { addCategory, handleAddCategoryFormActive } from "./todoReducer";
 
 export function AddCategory() {
   const [active, setActive] = useState(false);
@@ -11,6 +11,7 @@ export function AddCategory() {
 
   function HandleActive() {
     setActive((active) => !active);
+    dispatch(handleAddCategoryFormActive());
   }
 
   function HandleSubmit(e) {

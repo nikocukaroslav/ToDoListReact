@@ -2,17 +2,22 @@ import "./styles/App.css";
 import { ToDoList } from "./features/todos/ToDoList";
 import { AddToDoForm } from "./features/todos/AddToDoForm";
 import { AddCategory } from "./features/todos/AddCategory";
-import { FilterToDos } from "./features/todos/FilterToDos";
+import { useSelector } from "react-redux";
 
 function App() {
+  const isActive = useSelector((state) => state.todo.addCategoryFormActive);
   return (
-    <main>
-      <h2>ToDo list</h2>
-      <AddToDoForm />
-      <AddCategory />
-      <FilterToDos />
-      <ToDoList />
-    </main>
+    <>
+      <main>
+        <div className="div">
+          {isActive && <h2>ToDo list</h2>}
+          <AddCategory />
+        </div>
+        <AddToDoForm />
+
+        <ToDoList />
+      </main>
+    </>
   );
 }
 

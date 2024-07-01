@@ -2,7 +2,7 @@ import styles from "../../styles/ToDo.module.css";
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteToDo, togglePerformed } from "./ToDoSlice";
+import { deleteToDo, togglePerformed } from "./todoReducer";
 
 export function ToDo({ todo }) {
   const [active, setActive] = useState(false);
